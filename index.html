@@ -230,17 +230,23 @@
 
     /* ── MARKET SECTION ── */
     .market-section { background: linear-gradient(135deg, #0f1c3f, #1a3068); }
-    .market-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    @media (max-width: 768px) { .market-grid { grid-template-columns: 1fr; } }
+    .market-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    @media (max-width: 1200px) { .market-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px)  { .market-grid { grid-template-columns: 1fr; } }
     .market-card {
       background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12);
       border-radius: var(--radius); padding: 28px 24px;
       backdrop-filter: blur(8px);
     }
-    .market-card .region { font-size: .8rem; color: #60a5fa; font-weight: 700; letter-spacing: .06em; margin-bottom: 8px; }
-    .market-card .avg { font-size: 2rem; font-weight: 900; color: #fff; margin-bottom: 4px; }
-    .market-card .sub { font-size: .82rem; color: #94a3b8; margin-bottom: 18px; }
-    .market-card .trend { display: flex; align-items: center; gap: 6px; font-size: .85rem; }
+    .market-card .region-badge {
+      display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+      padding: 3px 9px; border-radius: 99px; margin-bottom: 10px;
+      background: rgba(255,255,255,.1); color: #93c5fd; border: 1px solid rgba(255,255,255,.15);
+    }
+    .market-card .region { font-size: 1rem; color: #fff; font-weight: 800; margin-bottom: 4px; }
+    .market-card .avg { font-size: 1.7rem; font-weight: 900; color: #fff; margin-bottom: 4px; line-height: 1.1; }
+    .market-card .sub { font-size: .76rem; color: #94a3b8; margin-bottom: 12px; }
+    .market-card .trend { display: flex; align-items: center; gap: 6px; font-size: .82rem; }
     .up { color: #f87171; } .down { color: #4ade80; } .flat { color: #94a3b8; }
 
     .mini-chart { display: flex; align-items: flex-end; gap: 4px; height: 40px; margin-top: 16px; }
@@ -1491,62 +1497,175 @@
   </div>
 
   <div class="market-grid">
+
+    <!-- 강남구 -->
     <div class="market-card fade-in">
+      <div class="region-badge">서울</div>
       <div class="region">강남구</div>
       <div class="avg">56.1억원</div>
-      <div class="sub">10건 거래 · 14.3억 ~ 97억</div>
+      <div class="sub">10건 · 14.3억 ~ 97억</div>
       <div class="trend"><span class="up">▲ 압구정동 7건 집중</span></div>
       <div class="mini-chart">
-        <div class="bar" style="height:40%"></div>
-        <div class="bar" style="height:55%"></div>
-        <div class="bar" style="height:48%"></div>
-        <div class="bar" style="height:65%"></div>
+        <div class="bar" style="height:15%"></div>
+        <div class="bar" style="height:36%"></div>
+        <div class="bar" style="height:45%"></div>
+        <div class="bar" style="height:54%"></div>
         <div class="bar" style="height:72%"></div>
-        <div class="bar" style="height:68%"></div>
-        <div class="bar" style="height:80%"></div>
-        <div class="bar" style="height:90%"></div>
-        <div class="bar" style="height:85%"></div>
+        <div class="bar" style="height:78%"></div>
+        <div class="bar" style="height:82%"></div>
+        <div class="bar" style="height:82%"></div>
+        <div class="bar" style="height:87%"></div>
         <div class="bar" style="height:100%"></div>
       </div>
     </div>
 
+    <!-- 서초구 -->
     <div class="market-card fade-in">
+      <div class="region-badge">서울</div>
+      <div class="region">서초구</div>
+      <div class="avg">20.6억원</div>
+      <div class="sub">10건 · 3.0억 ~ 45억</div>
+      <div class="trend"><span class="up">▲ 반포·잠원 고가 거래</span></div>
+      <div class="mini-chart">
+        <div class="bar" style="height:7%"></div>
+        <div class="bar" style="height:9%"></div>
+        <div class="bar" style="height:12%"></div>
+        <div class="bar" style="height:23%"></div>
+        <div class="bar" style="height:37%"></div>
+        <div class="bar" style="height:53%"></div>
+        <div class="bar" style="height:54%"></div>
+        <div class="bar" style="height:76%"></div>
+        <div class="bar" style="height:87%"></div>
+        <div class="bar" style="height:100%"></div>
+      </div>
+    </div>
+
+    <!-- 송파구 -->
+    <div class="market-card fade-in">
+      <div class="region-badge">서울</div>
       <div class="region">송파구</div>
       <div class="avg">19.1억원</div>
-      <div class="sub">10건 거래 · 6.0억 ~ 54.9억</div>
+      <div class="sub">10건 · 6.0억 ~ 54.9억</div>
       <div class="trend"><span class="flat">— 거여동·잠실동 분산</span></div>
       <div class="mini-chart">
-        <div class="bar" style="height:60%"></div>
-        <div class="bar" style="height:45%"></div>
-        <div class="bar" style="height:55%"></div>
-        <div class="bar" style="height:40%"></div>
-        <div class="bar" style="height:70%"></div>
-        <div class="bar" style="height:50%"></div>
-        <div class="bar" style="height:65%"></div>
-        <div class="bar" style="height:35%"></div>
-        <div class="bar" style="height:55%"></div>
+        <div class="bar" style="height:11%"></div>
+        <div class="bar" style="height:11%"></div>
+        <div class="bar" style="height:14%"></div>
+        <div class="bar" style="height:15%"></div>
+        <div class="bar" style="height:16%"></div>
+        <div class="bar" style="height:32%"></div>
+        <div class="bar" style="height:43%"></div>
+        <div class="bar" style="height:47%"></div>
+        <div class="bar" style="height:56%"></div>
         <div class="bar" style="height:100%"></div>
       </div>
     </div>
 
+    <!-- 분당구 -->
     <div class="market-card fade-in">
+      <div class="region-badge">경기</div>
+      <div class="region">분당구</div>
+      <div class="avg">14.2억원</div>
+      <div class="sub">10건 · 5.9억 ~ 21.5억</div>
+      <div class="trend"><span class="up">▲ 백현동 판교 강세</span></div>
+      <div class="mini-chart">
+        <div class="bar" style="height:27%"></div>
+        <div class="bar" style="height:43%"></div>
+        <div class="bar" style="height:47%"></div>
+        <div class="bar" style="height:56%"></div>
+        <div class="bar" style="height:69%"></div>
+        <div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:74%"></div>
+        <div class="bar" style="height:88%"></div>
+        <div class="bar" style="height:89%"></div>
+        <div class="bar" style="height:100%"></div>
+      </div>
+    </div>
+
+    <!-- 마포구 -->
+    <div class="market-card fade-in">
+      <div class="region-badge">서울</div>
       <div class="region">마포구</div>
       <div class="avg">10.4억원</div>
-      <div class="sub">10건 거래 · 6.4억 ~ 18.0억</div>
-      <div class="trend"><span class="down">▼ 망원동 다수 거래</span></div>
+      <div class="sub">10건 · 6.4억 ~ 18.0억</div>
+      <div class="trend"><span class="flat">— 망원동 다수 거래</span></div>
       <div class="mini-chart">
-        <div class="bar" style="height:75%"></div>
-        <div class="bar" style="height:65%"></div>
-        <div class="bar" style="height:80%"></div>
-        <div class="bar" style="height:70%"></div>
-        <div class="bar" style="height:55%"></div>
-        <div class="bar" style="height:60%"></div>
-        <div class="bar" style="height:45%"></div>
-        <div class="bar" style="height:85%"></div>
+        <div class="bar" style="height:36%"></div>
+        <div class="bar" style="height:36%"></div>
+        <div class="bar" style="height:36%"></div>
+        <div class="bar" style="height:46%"></div>
+        <div class="bar" style="height:47%"></div>
+        <div class="bar" style="height:57%"></div>
+        <div class="bar" style="height:61%"></div>
+        <div class="bar" style="height:67%"></div>
+        <div class="bar" style="height:95%"></div>
+        <div class="bar" style="height:100%"></div>
+      </div>
+    </div>
+
+    <!-- 해운대구 -->
+    <div class="market-card fade-in">
+      <div class="region-badge">부산</div>
+      <div class="region">해운대구</div>
+      <div class="avg">9.7억원</div>
+      <div class="sub">10건 · 4.6억 ~ 21.5억</div>
+      <div class="trend"><span class="up">▲ 재송·우동 초고층 거래</span></div>
+      <div class="mini-chart">
+        <div class="bar" style="height:21%"></div>
+        <div class="bar" style="height:25%"></div>
+        <div class="bar" style="height:28%"></div>
+        <div class="bar" style="height:29%"></div>
+        <div class="bar" style="height:29%"></div>
+        <div class="bar" style="height:41%"></div>
+        <div class="bar" style="height:42%"></div>
+        <div class="bar" style="height:47%"></div>
+        <div class="bar" style="height:91%"></div>
+        <div class="bar" style="height:100%"></div>
+      </div>
+    </div>
+
+    <!-- 수성구 -->
+    <div class="market-card fade-in">
+      <div class="region-badge">대구</div>
+      <div class="region">수성구</div>
+      <div class="avg">9.0억원</div>
+      <div class="sub">10건 · 4.0억 ~ 22.5억</div>
+      <div class="trend"><span class="up">▲ 범어동 위브더제니스 강세</span></div>
+      <div class="mini-chart">
+        <div class="bar" style="height:18%"></div>
+        <div class="bar" style="height:20%"></div>
+        <div class="bar" style="height:21%"></div>
+        <div class="bar" style="height:26%"></div>
+        <div class="bar" style="height:26%"></div>
+        <div class="bar" style="height:31%"></div>
+        <div class="bar" style="height:40%"></div>
+        <div class="bar" style="height:47%"></div>
         <div class="bar" style="height:70%"></div>
         <div class="bar" style="height:100%"></div>
       </div>
     </div>
+
+    <!-- 송도(연수구) -->
+    <div class="market-card fade-in">
+      <div class="region-badge">인천</div>
+      <div class="region">송도 (연수구)</div>
+      <div class="avg">7.2억원</div>
+      <div class="sub">10건 · 2.1억 ~ 10.6억</div>
+      <div class="trend"><span class="flat">— 송도동 9건 집중</span></div>
+      <div class="mini-chart">
+        <div class="bar" style="height:20%"></div>
+        <div class="bar" style="height:50%"></div>
+        <div class="bar" style="height:58%"></div>
+        <div class="bar" style="height:63%"></div>
+        <div class="bar" style="height:67%"></div>
+        <div class="bar" style="height:70%"></div>
+        <div class="bar" style="height:75%"></div>
+        <div class="bar" style="height:82%"></div>
+        <div class="bar" style="height:95%"></div>
+        <div class="bar" style="height:100%"></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
