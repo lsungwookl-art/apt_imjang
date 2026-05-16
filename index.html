@@ -314,6 +314,33 @@
     .price-high { color: #dc2626 !important; }
     .price-mid { color: var(--accent) !important; }
     .price-low { color: var(--success) !important; }
+    .txn-item { cursor: pointer; }
+    .price-card { cursor: pointer; }
+
+    /* ── SEARCH RESULTS ── */
+    .search-wrapper { position: relative; max-width: 680px; margin: 0 auto; }
+    .search-box { max-width: 100%; margin: 0; }
+    #search-results {
+      display: none; position: absolute; top: calc(100% + 10px); left: 0; right: 0;
+      background: #fff; border-radius: 14px; z-index: 500;
+      box-shadow: 0 12px 48px rgba(0,0,0,.22); overflow: hidden;
+      max-height: 420px; overflow-y: auto;
+    }
+    .sr-header { padding: 10px 18px; background: #f8fafc; font-size: .72rem; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--border); letter-spacing: .06em; }
+    .sr-item { padding: 13px 18px; border-bottom: 1px solid #f8fafc; cursor: pointer; display: flex; align-items: center; gap: 12px; transition: background .15s; }
+    .sr-item:hover { background: #eff6ff; }
+    .sr-item:last-child { border-bottom: none; }
+    .sr-badge { min-width: 48px; height: 26px; border-radius: 6px; background: #eff6ff; color: var(--accent); font-size: .69rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .sr-name { font-weight: 700; font-size: .9rem; color: var(--primary); }
+    .sr-sub { font-size: .75rem; color: var(--muted); margin-top: 2px; }
+    .sr-price { margin-left: auto; font-weight: 800; font-size: .88rem; color: #dc2626; white-space: nowrap; padding-left: 12px; }
+    .sr-empty { padding: 28px; text-align: center; color: var(--muted); font-size: .9rem; }
+
+    /* ── TXN DETAIL MODAL ── */
+    .txn-price-display { text-align: center; background: #f8fafc; border-radius: 12px; padding: 22px; margin-bottom: 20px; }
+    .txn-price-display .tpd-label { font-size: .78rem; color: var(--muted); margin-bottom: 8px; }
+    .txn-price-display .tpd-val { font-size: 2.2rem; font-weight: 900; }
+    .txn-highlight { background: #eff6ff !important; border-color: var(--accent) !important; transition: background .3s, border-color .3s; }
 
     /* ── CTA ── */
     .cta-section {
@@ -425,6 +452,7 @@
   <h1>아파트 <span>실거래가 & 단지</span><br>한눈에 분석</h1>
   <p>공공 실거래 데이터 기반의 정확한 시세와 AI 편의성 분석으로<br>나에게 맞는 아파트를 빠르게 찾아보세요.</p>
 
+  <div class="search-wrapper">
   <div class="search-box">
     <select id="searchSido">
       <option value="">전국</option>
@@ -448,6 +476,8 @@
     </select>
     <input type="text" id="searchInput" placeholder="구, 동, 아파트명 검색..." />
     <button class="search-btn" onclick="handleSearch()">검색</button>
+  </div>
+  <div id="search-results"></div>
   </div>
 
   <div class="hero-stats">
@@ -1886,8 +1916,36 @@
   </div>
 </div>
 
+<!-- TXN DETAIL MODAL -->
+<div class="modal-overlay" id="modal-txn" onclick="closeModal('txn')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-header" id="txn-modal-header">
+      <div>
+        <h2 id="txn-modal-name">아파트명</h2>
+        <div class="sub" id="txn-modal-sub">지역</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('txn')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="txn-price-display">
+        <div class="tpd-label">2025년 4월 실거래가</div>
+        <div class="tpd-val" id="txn-modal-price"></div>
+      </div>
+      <div class="detail-grid">
+        <div class="detail-item"><div class="dl">전용면적</div><div class="dv" id="txn-modal-area">—</div></div>
+        <div class="detail-item"><div class="dl">층수</div><div class="dv" id="txn-modal-floor">—</div></div>
+        <div class="detail-item"><div class="dl">준공년도</div><div class="dv" id="txn-modal-year">—</div></div>
+        <div class="detail-item"><div class="dl">거래일</div><div class="dv" id="txn-modal-date">—</div></div>
+      </div>
+      <p style="font-size:.78rem;color:#94a3b8;margin-top:16px;text-align:center">국토교통부 실거래가 공개시스템 데이터 기준</p>
+    </div>
+  </div>
+</div>
+
 <script>
-  // ── COUNTER ANIMATION ──
+  // ══════════════════════════════
+  // 카운터 애니메이션
+  // ══════════════════════════════
   function animateCount(el) {
     const target = parseInt(el.dataset.count);
     const suffix = el.dataset.suffix || '';
@@ -1895,26 +1953,20 @@
     const duration = 1800;
     const start = performance.now();
     const isLarge = target > 9999;
-
     function update(now) {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
       const val = Math.floor(ease * target);
-
-      if (isLarge) {
-        const eo = (val / 10000).toFixed(1);
-        el.textContent = prefix + eo + '억원';
-      } else {
-        el.textContent = prefix + val.toLocaleString() + suffix;
-      }
-
+      el.textContent = isLarge ? prefix + (val / 10000).toFixed(1) + '억원' : prefix + val.toLocaleString() + suffix;
       if (progress < 1) requestAnimationFrame(update);
     }
     requestAnimationFrame(update);
   }
 
-  // ── INTERSECTION OBSERVER ──
+  // ══════════════════════════════
+  // 스크롤 페이드인
+  // ══════════════════════════════
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       if (e.isIntersecting) {
@@ -1924,15 +1976,12 @@
       }
     });
   }, { threshold: 0.15 });
-
   document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
+  document.querySelectorAll('.hero-stat .val[data-count]').forEach(el => setTimeout(() => animateCount(el), 400));
 
-  // Hero counters
-  document.querySelectorAll('.hero-stat .val[data-count]').forEach(el => {
-    setTimeout(() => animateCount(el), 400);
-  });
-
-  // ── TAB SWITCHERS ──
+  // ══════════════════════════════
+  // 탭 전환
+  // ══════════════════════════════
   function switchTxn(id, btn) {
     ['txn-gangnam','txn-seocho','txn-songpa','txn-mapo','txn-bundang','txn-haeundae','txn-suseong','txn-songdo'].forEach(t => {
       const el = document.getElementById(t);
@@ -1956,7 +2005,9 @@
     btn.classList.add('active');
   }
 
-  // ── MODAL ──
+  // ══════════════════════════════
+  // 모달
+  // ══════════════════════════════
   function openModal(id) {
     document.getElementById('modal-' + id).classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -1974,16 +2025,204 @@
     }
   });
 
-  // ── SEARCH ──
-  function handleSearch() {
-    const q = document.getElementById('searchInput').value.trim();
-    const sido = document.getElementById('searchSido').value;
-    if (!q) { alert('검색어를 입력하세요.'); return; }
-    alert(`"${sido} ${q}" 검색 기능은 서버 연동 후 제공됩니다.\n\n현재 페이지에 표시된 데이터는 PlayMCP AptInfo API 실데이터입니다.`);
+  // ══════════════════════════════
+  // 거래 항목 클릭 → 상세 모달
+  // ══════════════════════════════
+  function showTxnModal(item) {
+    const name  = item.querySelector('.tn')?.textContent?.trim() || '';
+    const sub   = item.querySelector('.ts')?.textContent?.trim() || '';
+    const price = item.querySelector('.tp')?.textContent?.trim() || '';
+    const area  = item.querySelector('.ta')?.textContent?.trim() || '';
+
+    const parts     = sub.split('·').map(s => s.trim());
+    const district  = parts[0] || '';
+    const buildYear = parts[1] || '';
+    const floor     = parts[2] || '';
+    const areaParts = area.split('·').map(s => s.trim());
+    const areaStr   = areaParts[0] || '';
+    const dateStr   = areaParts[1] || '';
+
+    const tp = item.querySelector('.tp');
+    const priceColor = tp?.classList.contains('price-high') ? '#dc2626'
+                     : tp?.classList.contains('price-mid')  ? '#3b6ef8'
+                     : '#10b981';
+
+    document.getElementById('txn-modal-name').textContent  = name;
+    document.getElementById('txn-modal-sub').textContent   = district;
+    document.getElementById('txn-modal-price').textContent = price;
+    document.getElementById('txn-modal-price').style.color = priceColor;
+    document.getElementById('txn-modal-area').textContent  = areaStr || '—';
+    document.getElementById('txn-modal-floor').textContent = floor   || '—';
+    document.getElementById('txn-modal-year').textContent  = buildYear || '—';
+    document.getElementById('txn-modal-date').textContent  = dateStr || '—';
+
+    openModal('txn');
   }
 
+  // 모든 거래 항목에 클릭 이벤트 등록
+  function initTxnClicks() {
+    document.querySelectorAll('.txn-item').forEach(item => {
+      item.addEventListener('click', () => showTxnModal(item));
+    });
+  }
+
+  // ══════════════════════════════
+  // 단지 카드 클릭 → 모달 or 탭 이동
+  // ══════════════════════════════
+  const MODAL_MAP = {
+    '잠실엘스아파트': 'els', '잠실리센츠': 'ricenz',
+    '잠실동트리지움': 'trij', '잠실동 트리지움': 'trij',
+  };
+  const TAB_MAP = {
+    '강남구': 'gangnam', '역삼동': 'gangnam',
+    '서초구': 'seocho',
+    '송파구': 'songpa', '잠실동': 'songpa',
+    '마포구': 'mapo',
+    '분당구': 'bundang',
+    '해운대구': 'haeundae',
+    '수성구': 'suseong',
+    '연수구': 'songdo', '송도': 'songdo',
+  };
+
+  function initPriceCardClicks() {
+    document.querySelectorAll('.price-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const aptName = card.querySelector('.apt-name')?.textContent?.trim() || '';
+        const aptMeta = card.querySelector('.apt-meta')?.textContent?.trim() || '';
+
+        if (MODAL_MAP[aptName]) { openModal(MODAL_MAP[aptName]); return; }
+
+        const tabId = Object.entries(TAB_MAP).find(([k]) => aptMeta.includes(k))?.[1] || 'gangnam';
+        const tabBtn = document.querySelector(`.txn-tab[onclick*="'${tabId}'"]`);
+        if (tabBtn) switchTxn(tabId, tabBtn);
+        document.getElementById('price').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  }
+
+  // ══════════════════════════════
+  // 검색 — 실시간 필터 + 드롭다운
+  // ══════════════════════════════
+  let _searchData = [];
+
+  function buildSearchData() {
+    const data = [];
+    const REGIONS = {
+      gangnam: '강남구', seocho: '서초구', songpa: '송파구', mapo: '마포구',
+      bundang: '분당구', haeundae: '해운대구', suseong: '수성구', songdo: '송도'
+    };
+    Object.entries(REGIONS).forEach(([id, region]) => {
+      const list = document.getElementById('txn-' + id);
+      if (!list) return;
+      list.querySelectorAll('.txn-item').forEach(item => {
+        data.push({
+          tabId:  id,
+          region: region,
+          name:   item.querySelector('.tn')?.textContent?.trim() || '',
+          sub:    item.querySelector('.ts')?.textContent?.trim() || '',
+          price:  item.querySelector('.tp')?.textContent?.trim() || '',
+          area:   item.querySelector('.ta')?.textContent?.trim() || '',
+          el:     item,
+        });
+      });
+    });
+    return data;
+  }
+
+  function handleSearch() {
+    const q     = document.getElementById('searchInput').value.trim();
+    const sido  = document.getElementById('searchSido').value;
+    const panel = document.getElementById('search-results');
+    if (!q) { panel.style.display = 'none'; return; }
+
+    const ql = q.toLowerCase();
+    let results = _searchData.filter(d => {
+      const regionOk = !sido || d.region.includes(sido) || d.sub.includes(sido);
+      const textOk   = d.name.toLowerCase().includes(ql) ||
+                       d.region.toLowerCase().includes(ql) ||
+                       d.sub.toLowerCase().includes(ql);
+      return regionOk && textOk;
+    });
+
+    // 아파트명+지역 기준 중복 제거
+    const seen = new Set();
+    results = results.filter(d => {
+      const key = d.name + d.region;
+      if (seen.has(key)) return false;
+      seen.add(key); return true;
+    });
+
+    renderSearchResults(results.slice(0, 8));
+  }
+
+  function renderSearchResults(results) {
+    const panel = document.getElementById('search-results');
+    if (results.length === 0) {
+      panel.innerHTML = '<div class="sr-empty">검색 결과가 없습니다.<br><span style="font-size:.8rem;color:#94a3b8">다른 지역이나 아파트명을 입력해보세요</span></div>';
+      panel.style.display = 'block';
+      panel._results = [];
+      return;
+    }
+    panel.innerHTML = `
+      <div class="sr-header">검색 결과 ${results.length}건</div>
+      ${results.map((d, i) => `
+        <div class="sr-item" onclick="selectSearchResult(${i})">
+          <div class="sr-badge">${d.region}</div>
+          <div style="min-width:0">
+            <div class="sr-name">${d.name}</div>
+            <div class="sr-sub">${d.sub}</div>
+          </div>
+          <div class="sr-price">${d.price}</div>
+        </div>
+      `).join('')}
+    `;
+    panel.style.display = 'block';
+    panel._results = results;
+  }
+
+  function selectSearchResult(idx) {
+    const panel = document.getElementById('search-results');
+    const d = (panel._results || [])[idx];
+    if (!d) return;
+    panel.style.display = 'none';
+
+    // 탭 전환
+    const tabBtn = document.querySelector(`.txn-tab[onclick*="'${d.tabId}'"]`);
+    if (tabBtn) switchTxn(d.tabId, tabBtn);
+
+    // 실거래가 섹션으로 스크롤
+    document.getElementById('price').scrollIntoView({ behavior: 'smooth' });
+
+    // 해당 항목 하이라이트
+    setTimeout(() => {
+      d.el.classList.add('txn-highlight');
+      d.el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => d.el.classList.remove('txn-highlight'), 2200);
+    }, 700);
+  }
+
+  // 검색창 입력 시 실시간 검색
+  document.getElementById('searchInput').addEventListener('input', handleSearch);
   document.getElementById('searchInput').addEventListener('keydown', e => {
     if (e.key === 'Enter') handleSearch();
+    if (e.key === 'Escape') document.getElementById('search-results').style.display = 'none';
+  });
+
+  // 검색 영역 밖 클릭 시 드롭다운 닫기
+  document.addEventListener('click', e => {
+    const wrapper = document.querySelector('.search-wrapper');
+    if (wrapper && !wrapper.contains(e.target)) {
+      document.getElementById('search-results').style.display = 'none';
+    }
+  });
+
+  // ══════════════════════════════
+  // 초기화
+  // ══════════════════════════════
+  window.addEventListener('DOMContentLoaded', () => {
+    _searchData = buildSearchData();
+    initTxnClicks();
+    initPriceCardClicks();
   });
 </script>
 </body>
