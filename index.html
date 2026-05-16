@@ -271,13 +271,20 @@
 
     /* ── TRANSACTION LIST ── */
     .txn-section { background: var(--bg); }
-    .txn-tabs { display: flex; gap: 0; background: #f1f5f9; border-radius: 10px; padding: 4px; max-width: 400px; margin: 0 auto 32px; }
-    .txn-tab {
-      flex: 1; padding: 9px 0; text-align: center; border-radius: 8px;
-      font-size: .87rem; font-weight: 600; cursor: pointer;
-      color: var(--muted); transition: all .2s; border: none; background: none;
+    .txn-region-group { display: flex; flex-direction: column; gap: 12px; align-items: center; margin-bottom: 28px; }
+    .txn-region-label { font-size: .72rem; font-weight: 700; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .txn-tabs {
+      display: flex; gap: 6px; flex-wrap: wrap; justify-content: center;
+      max-width: 760px; margin: 0 auto 32px;
     }
-    .txn-tab.active { background: #fff; color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+    .txn-tab {
+      padding: 8px 18px; border-radius: 99px; border: 2px solid var(--border);
+      background: #fff; font-size: .85rem; font-weight: 600; cursor: pointer;
+      color: var(--muted); transition: all .2s; white-space: nowrap;
+    }
+    .txn-tab:hover { border-color: var(--accent); color: var(--accent); }
+    .txn-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 2px 10px rgba(59,110,248,.3); }
+    .txn-tab .region-avg { font-size: .72rem; opacity: .8; margin-left: 4px; }
 
     .txn-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; margin: 0 auto; }
     .txn-item {
@@ -466,9 +473,14 @@
   </div>
 
   <div class="txn-tabs">
-    <button class="txn-tab active" onclick="switchTxn('gangnam', this)">강남구</button>
-    <button class="txn-tab" onclick="switchTxn('songpa', this)">송파구</button>
-    <button class="txn-tab" onclick="switchTxn('mapo', this)">마포구</button>
+    <button class="txn-tab active" onclick="switchTxn('gangnam', this)">🏙️ 강남구<span class="region-avg">평균 56억</span></button>
+    <button class="txn-tab" onclick="switchTxn('seocho', this)">🌿 서초구<span class="region-avg">평균 20억</span></button>
+    <button class="txn-tab" onclick="switchTxn('songpa', this)">🏟️ 송파구<span class="region-avg">평균 19억</span></button>
+    <button class="txn-tab" onclick="switchTxn('mapo', this)">🎨 마포구<span class="region-avg">평균 10억</span></button>
+    <button class="txn-tab" onclick="switchTxn('bundang', this)">🌳 분당구<span class="region-avg">평균 14억</span></button>
+    <button class="txn-tab" onclick="switchTxn('haeundae', this)">🌊 해운대구<span class="region-avg">평균 9.7억</span></button>
+    <button class="txn-tab" onclick="switchTxn('suseong', this)">🦌 수성구<span class="region-avg">평균 9억</span></button>
+    <button class="txn-tab" onclick="switchTxn('songdo', this)">🚢 송도(연수구)<span class="region-avg">평균 7.2억</span></button>
   </div>
 
   <!-- 강남구 -->
@@ -787,6 +799,565 @@
       <div class="txn-right">
         <div class="tp price-low">6억 4천만원</div>
         <div class="ta">55.29㎡ (16.7평) · 4월 30일</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 서초구 -->
+  <div class="txn-list" id="txn-seocho" style="display:none">
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏆</div>
+      <div>
+        <div class="tn">래미안퍼스티지</div>
+        <div class="ts">반포동 · 2009년 준공 · 8층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">45억원</div>
+        <div class="ta">84.93㎡ (25.7평) · 4월 29일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏛️</div>
+      <div>
+        <div class="tn">신반포2</div>
+        <div class="ts">잠원동 · 1978년 준공 · 6층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">39억원</div>
+        <div class="ta">79.42㎡ (24.0평) · 4월 12일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">래미안 리더스원</div>
+        <div class="ts">서초동 · 2020년 준공 · 5층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">34억원</div>
+        <div class="ta">74.9㎡ (22.7평) · 4월 23일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">현대</div>
+        <div class="ts">잠원동 · 1993년 준공 · 5층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">24억 3천만원</div>
+        <div class="ta">84.87㎡ (25.7평) · 4월 29일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">래미안방배아트힐</div>
+        <div class="ts">방배동 · 2004년 준공 · 10층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">24억원</div>
+        <div class="ta">127.31㎡ (38.5평) · 4월 25일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">방배브라운가</div>
+        <div class="ts">방배동 · 2006년 준공 · 3층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">16억 7천만원</div>
+        <div class="ta">84.94㎡ (25.7평) · 4월 25일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">옥스포드빌라트</div>
+        <div class="ts">서초동 · 2003년 준공 · 5층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">10억 5천만원</div>
+        <div class="ta">76.41㎡ (23.1평) · 4월 25일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">대림서초리시온</div>
+        <div class="ts">서초동 · 2003년 준공 · 4층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">5억 6천만원</div>
+        <div class="ta">49.92㎡ (15.1평) · 4월 20일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">서초이오빌</div>
+        <div class="ts">서초동 · 2003년 준공 · 12층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">3억 9천만원</div>
+        <div class="ta">43.2㎡ (13.1평) · 4월 24일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">방배대우디오빌</div>
+        <div class="ts">방배동 · 2005년 준공 · 14층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">3억원</div>
+        <div class="ta">29.6㎡ (9.0평) · 4월 28일</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 분당구 -->
+  <div class="txn-list" id="txn-bundang" style="display:none">
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏆</div>
+      <div>
+        <div class="tn">백현마을2단지</div>
+        <div class="ts">백현동 · 2009년 준공 · 3층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">21억 5천만원</div>
+        <div class="ta">101.91㎡ (30.8평) · 4월 9일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">백현마을7단지(주공)</div>
+        <div class="ts">백현동 · 2009년 준공 · 16층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">19억 2천만원</div>
+        <div class="ta">74.76㎡ (22.6평) · 4월 30일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">미켈란쉐르빌</div>
+        <div class="ts">정자동 · 2003년 준공 · 21층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">19억원</div>
+        <div class="ta">165.25㎡ (50.0평) · 4월 8일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">파크타운(롯데)</div>
+        <div class="ts">수내동 · 1993년 준공 · 1층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">16억원</div>
+        <div class="ta">101.83㎡ (30.8평) · 4월 4일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">효자촌(삼환)</div>
+        <div class="ts">서현동 · 1992년 준공 · 3층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">15억원</div>
+        <div class="ta">129.76㎡ (39.3평) · 4월 17일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">장미마을(동부)</div>
+        <div class="ts">야탑동 · 1993년 준공 · 12층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">14억 8천만원</div>
+        <div class="ta">131.73㎡ (39.8평) · 4월 3일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">장미마을(코오롱)1</div>
+        <div class="ts">야탑동 · 1993년 준공 · 3층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">12억 1천만원</div>
+        <div class="ta">84.6㎡ (25.6평) · 4월 18일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">탑마을(벽산)</div>
+        <div class="ts">야탑동 · 1994년 준공 · 6층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">10억원</div>
+        <div class="ta">69.87㎡ (21.1평) · 4월 30일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">장미마을(동부)</div>
+        <div class="ts">야탑동 · 1993년 준공 · 4층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">9억 3천만원</div>
+        <div class="ta">59.76㎡ (18.1평) · 4월 16일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">하얀마을(5단지)(주공)</div>
+        <div class="ts">구미동 · 1995년 준공 · 9층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">5억 9천만원</div>
+        <div class="ta">35.28㎡ (10.7평) · 4월 29일</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 해운대구 -->
+  <div class="txn-list" id="txn-haeundae" style="display:none">
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏆</div>
+      <div>
+        <div class="tn">더샵센텀파크1차</div>
+        <div class="ts">재송동 · 2005년 준공 · 45층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">21억 5천만원</div>
+        <div class="ta">151.9㎡ (46.0평) · 4월 30일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">해운대두산위브더제니스</div>
+        <div class="ts">우동 · 2011년 준공 · 60층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">19억 5천만원</div>
+        <div class="ta">127.6㎡ (38.6평) · 4월 29일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">더샵센텀스타</div>
+        <div class="ts">재송동 · 2008년 준공 · 27층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">10억 2천만원</div>
+        <div class="ta">115.93㎡ (35.1평) · 4월 30일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">우신골든메르시아</div>
+        <div class="ts">우동 · 2010년 준공 · 20층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">9억원</div>
+        <div class="ta">150.21㎡ (45.4평) · 4월 28일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">해운대비스타동원</div>
+        <div class="ts">우동 · 2019년 준공 · 41층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">8억 9천만원</div>
+        <div class="ta">84.94㎡ (25.7평) · 4월 20일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">롯데캐슬마린</div>
+        <div class="ts">중동 · 2004년 준공 · 20층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">6억 3천만원</div>
+        <div class="ta">84.97㎡ (25.7평) · 4월 18일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">센텀리슈빌2단지</div>
+        <div class="ts">재송동 · 2019년 준공 · 2층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">6억원</div>
+        <div class="ta">84.99㎡ (25.7평) · 4월 18일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">대림</div>
+        <div class="ts">좌동 · 1996년 준공 · 10층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">5억 3천만원</div>
+        <div class="ta">84.97㎡ (25.7평) · 4월 25일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">메가센텀한화꿈에그린</div>
+        <div class="ts">반여동 · 2008년 준공 · 16층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">4억 6천만원</div>
+        <div class="ta">84.97㎡ (25.7평) · 4월 5일</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 수성구 -->
+  <div class="txn-list" id="txn-suseong" style="display:none">
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏆</div>
+      <div>
+        <div class="tn">두산위브더제니스</div>
+        <div class="ts">범어동 · 2009년 준공 · 35층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">22억 5천만원</div>
+        <div class="ta">171.4㎡ (51.9평) · 4월 8일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">두산위브더제니스</div>
+        <div class="ts">범어동 · 2009년 준공 · 12층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-high">15억 7천만원</div>
+        <div class="ta">137.06㎡ (41.5평) · 4월 20일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">수성코오롱하늘채</div>
+        <div class="ts">수성동3가 · 2009년 준공 · 8층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">10억 6천만원</div>
+        <div class="ta">127.06㎡ (38.4평) · 4월 19일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">수성3가롯데캐슬</div>
+        <div class="ts">수성동3가 · 2008년 준공 · 12층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">8억 9천만원</div>
+        <div class="ta">100.94㎡ (30.5평) · 4월 28일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">e편한세상범어</div>
+        <div class="ts">범어동 · 2015년 준공 · 20층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">7억원</div>
+        <div class="ta">84.77㎡ (25.6평) · 4월 26일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">만촌우방타운1단지</div>
+        <div class="ts">만촌동 · 1997년 준공 · 14층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">5억 9천만원</div>
+        <div class="ta">84.92㎡ (25.7평) · 4월 12일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">수성효성해링턴플레이스</div>
+        <div class="ts">중동 · 2020년 준공 · 11층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">5억 9천만원</div>
+        <div class="ta">84.99㎡ (25.7평) · 4월 27일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">수성하늘채르레브</div>
+        <div class="ts">범물동 · 2020년 준공 · 8층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">4억 8천만원</div>
+        <div class="ta">84.99㎡ (25.7평) · 4월 11일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">수성하늘채르레브</div>
+        <div class="ts">범물동 · 2020년 준공 · 9층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">4억 5천만원</div>
+        <div class="ta">77.65㎡ (23.5평) · 4월 8일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">수성월드메르디앙</div>
+        <div class="ts">노변동 · 2007년 준공 · 8층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">4억원</div>
+        <div class="ta">84.8㎡ (25.7평) · 4월 4일</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 송도(연수구) -->
+  <div class="txn-list" id="txn-songdo" style="display:none">
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏆</div>
+      <div>
+        <div class="tn">송도웰카운티4단지</div>
+        <div class="ts">송도동 · 2010년 준공 · 15층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">10억 6천만원</div>
+        <div class="ta">149.41㎡ (45.2평) · 4월 29일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">송도더샵파크애비뉴</div>
+        <div class="ts">송도동 · 2018년 준공 · 39층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">10억 1천만원</div>
+        <div class="ta">68.64㎡ (20.8평) · 4월 19일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">송도더샵그린애비뉴8단지</div>
+        <div class="ts">송도동 · 2012년 준공 · 26층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">8억 7천만원</div>
+        <div class="ta">101.94㎡ (30.8평) · 4월 8일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏠</div>
+      <div>
+        <div class="tn">송도에듀포레푸르지오</div>
+        <div class="ts">송도동 · 2016년 준공 · 32층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">7억 9천만원</div>
+        <div class="ta">84.51㎡ (25.6평) · 4월 3일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">더샵퍼스트월드</div>
+        <div class="ts">송도동 · 2009년 준공 · 11층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">7억 4천만원</div>
+        <div class="ta">101.74㎡ (30.8평) · 4월 15일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">힐스테이트레이크송도1차</div>
+        <div class="ts">송도동 · 2019년 준공 · 9층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">7억 1천만원</div>
+        <div class="ta">84.97㎡ (25.7평) · 4월 8일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">힐스테이트레이크송도2차</div>
+        <div class="ts">송도동 · 2020년 준공 · 2층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-mid">6억 7천만원</div>
+        <div class="ta">84.97㎡ (25.7평) · 4월 12일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">송도오션파크베르디움</div>
+        <div class="ts">송도동 · 2020년 준공 · 2층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">6억 1천만원</div>
+        <div class="ta">84.84㎡ (25.7평) · 4월 22일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">e편한세상송도</div>
+        <div class="ts">송도동 · 2018년 준공 · 8층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">5억 3천만원</div>
+        <div class="ta">70.56㎡ (21.3평) · 4월 28일</div>
+      </div>
+    </div>
+    <div class="txn-item fade-in">
+      <div class="txn-icon">🏢</div>
+      <div>
+        <div class="tn">우성2</div>
+        <div class="ts">연수동 · 1994년 준공 · 12층</div>
+      </div>
+      <div class="txn-right">
+        <div class="tp price-low">2억 1천만원</div>
+        <div class="ta">40.5㎡ (12.3평) · 4월 21일</div>
       </div>
     </div>
   </div>
@@ -1244,8 +1815,9 @@
 
   // ── TAB SWITCHERS ──
   function switchTxn(id, btn) {
-    ['txn-gangnam','txn-songpa','txn-mapo'].forEach(t => {
-      document.getElementById(t).style.display = 'none';
+    ['txn-gangnam','txn-seocho','txn-songpa','txn-mapo','txn-bundang','txn-haeundae','txn-suseong','txn-songdo'].forEach(t => {
+      const el = document.getElementById(t);
+      if (el) el.style.display = 'none';
     });
     document.getElementById('txn-' + id).style.display = 'flex';
     document.querySelectorAll('.txn-tab').forEach(b => b.classList.remove('active'));
