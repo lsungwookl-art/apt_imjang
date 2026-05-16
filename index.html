@@ -87,20 +87,27 @@
     .hero p { color: #94a3b8; font-size: 1.05rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
 
     .search-box {
-      display: flex; gap: 0; max-width: 560px; margin: 0 auto;
+      display: flex; gap: 0; max-width: 680px; margin: 0 auto;
       background: #fff; border-radius: 12px; overflow: hidden;
       box-shadow: 0 8px 40px rgba(0,0,0,.3);
     }
-    .search-box select, .search-box input {
+    .search-box select {
+      border: none; outline: none; padding: 16px 20px;
+      font-size: .95rem; font-family: inherit;
+      min-width: 160px; flex-shrink: 0;
+      border-right: 1px solid var(--border);
+      color: var(--primary); font-weight: 600; background: #f8fafc;
+      cursor: pointer; appearance: auto;
+    }
+    .search-box input {
       border: none; outline: none; padding: 16px 18px;
       font-size: .95rem; font-family: inherit;
+      flex: 1; min-width: 0; color: var(--text);
     }
-    .search-box select { border-right: 1px solid var(--border); color: var(--primary); font-weight: 600; background: #f8fafc; }
-    .search-box input { flex: 1; color: var(--text); }
     .search-box input::placeholder { color: #94a3b8; }
     .search-btn {
       background: var(--accent); color: #fff; border: none;
-      padding: 16px 24px; font-size: .95rem; font-weight: 700;
+      padding: 16px 28px; font-size: .95rem; font-weight: 700;
       cursor: pointer; transition: background .2s; white-space: nowrap;
     }
     .search-btn:hover { background: #2555e8; }
@@ -407,10 +414,24 @@
 
   <div class="search-box">
     <select id="searchSido">
-      <option value="서울">서울</option>
-      <option value="경기">경기</option>
-      <option value="인천">인천</option>
-      <option value="부산">부산</option>
+      <option value="">전국</option>
+      <option value="서울">서울특별시</option>
+      <option value="경기">경기도</option>
+      <option value="인천">인천광역시</option>
+      <option value="부산">부산광역시</option>
+      <option value="대구">대구광역시</option>
+      <option value="대전">대전광역시</option>
+      <option value="광주">광주광역시</option>
+      <option value="울산">울산광역시</option>
+      <option value="세종">세종특별자치시</option>
+      <option value="강원">강원특별자치도</option>
+      <option value="충북">충청북도</option>
+      <option value="충남">충청남도</option>
+      <option value="전북">전북특별자치도</option>
+      <option value="전남">전라남도</option>
+      <option value="경북">경상북도</option>
+      <option value="경남">경상남도</option>
+      <option value="제주">제주특별자치도</option>
     </select>
     <input type="text" id="searchInput" placeholder="구, 동, 아파트명 검색..." />
     <button class="search-btn" onclick="handleSearch()">검색</button>
